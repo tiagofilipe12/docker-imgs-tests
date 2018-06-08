@@ -31,7 +31,7 @@ RUN perl -e'use CPAN; install "File::Slurp"'
 # Install lyve-SET
 RUN wget https://github.com/lskatz/lyve-SET/archive/v1.1.4f.tar.gz
 
-RUN tar xf lyve-SET-1.1.4f.tar.gz
+RUN tar xf v1.1.4f.tar.gz && rm v1.1.4f.tar.gz
 
 WORKDIR /NGStools/lyve-SET-1.1.4f
 
