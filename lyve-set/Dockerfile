@@ -37,6 +37,6 @@ WORKDIR /NGStools/lyve-SET-1.1.4f
 
 RUN make install
 
-ENV PATH="/NGStools/lyve-SET/scripts:$PATH"
+ENV PATH="/NGStools/lyve-SET-1.1.4f/scripts:$PATH"
 
 WORKDIR /data
