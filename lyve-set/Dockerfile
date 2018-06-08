@@ -33,3 +33,5 @@ RUN git clone https://github.com/lskatz/lyve-SET.git
 WORKDIR /NGStools/lyve-SET
 
 RUN make install
+
+ENV PATH="/NGStools/lyve-SET/scripts:$PATH"
