@@ -9,7 +9,8 @@ RUN apt-get update && apt-get -y install \
     libncurses-dev \
     build-essential \
     unzip \
-    subversion
+    subversion \
+    default-jre
 
 WORKDIR /NGStools
 
@@ -21,17 +22,21 @@ ENV PATH="/NGStools/miniconda/bin:$PATH"
 # Configure channels for bioconda
 RUN conda config --add channels defaults && conda config --add channels conda-forge && conda config --add channels bioconda
 
-# INSTALL kraken
-RUN conda install -c bioconda entrez-direct
+# INSTALL kraken, blast, bioperl-core
+RUN conda install -c bioconda entrez-direct blast perl-bioperl-core
 
-# INSTALL blast+
-RUN conda install -c bioconda blast
+# Installing other dependencies that were required for the test lambda dataset
+RUN perl -e'use CPAN; install "File::Slurp"'
 
 # Install lyve-SET
-RUN git clone https://github.com/lskatz/lyve-SET.git
+RUN wget https://github.com/lskatz/lyve-SET/archive/v1.1.4f.tar.gz
 
-WORKDIR /NGStools/lyve-SET
+RUN tar xf lyve-SET-1.1.4f.tar.gz
+
+WORKDIR /NGStools/lyve-SET-1.1.4f
 
 RUN make install
 
 ENV PATH="/NGStools/lyve-SET/scripts:$PATH"
+
+WORKDIR /data
